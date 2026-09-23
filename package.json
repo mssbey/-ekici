@@ -1,0 +1,21 @@
+{
+  "name": "uysal-oto-kurtarma",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node scripts/server.mjs --watch",
+    "build": "node scripts/build.mjs",
+    "build:production": "node scripts/build.mjs --production",
+    "preview": "node scripts/server.mjs",
+    "images": "node scripts/images.mjs",
+    "test": "node --test tests/site.test.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1",
+    "sharp": "^0.35.4"
+  }
+}

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" fill="none">
+  <title>UYSAL OTO KURTARMA amblemi</title>
+  <path d="M24 3h48c11.6 0 21 9.4 21 21v48c0 11.6-9.4 21-21 21H24C12.4 93 3 83.6 3 72V24C3 12.4 12.4 3 24 3Z" fill="#202725"/>
+  <path d="M24 7h48c9.4 0 17 7.6 17 17v48c0 9.4-7.6 17-17 17H24C14.6 89 7 81.4 7 72V24c0-9.4 7.6-17 17-17Z" stroke="#F5C842" stroke-width="1.4"/>
+  <path d="m42 57 17-30h18v7H63L50 57Z" fill="#F5C842"/>
+  <path d="M74 34v10a5 5 0 0 1-10 0" stroke="#F5C842" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M15 52 23 38h15l8 19h34v11H15V52Z" fill="#F5C842"/>
+  <path d="m20 51 5-9h10l4 9H20Z" fill="#202725"/>
+  <path d="M15 58h7" stroke="#FFEFAD" stroke-width="3"/>
+  <path d="M50 61h26" stroke="#FFEFAD" stroke-width="2"/>
+  <circle cx="29" cy="68" r="9" fill="#202725"/>
+  <circle cx="29" cy="68" r="5.2" fill="#F5C842"/>
+  <circle cx="29" cy="68" r="2" fill="#202725"/>
+  <circle cx="67" cy="68" r="9" fill="#202725"/>
+  <circle cx="67" cy="68" r="5.2" fill="#F5C842"/>
+  <circle cx="67" cy="68" r="2" fill="#202725"/>
+  <path d="M19 81h58" stroke="#687166" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M21 27h12m-9-6h12" stroke="#F5C842" stroke-width="2.8" stroke-linecap="round"/>
+</svg>
