@@ -6,11 +6,11 @@ export function validateConfig(c, { production = false, checkFiles = true } = {}
   const required = key => { if (!String(c[key] || '').trim()) errors.push(`${key}: doğrulanmış bilgi eklenmeli.`); };
   if (production) {
     if (!c.published) errors.push('published: işletme bilgileri doğrulandıktan sonra true yapın.');
-    ['domain', 'phone', 'whatsapp', 'city', 'district', 'address', 'hoursLabel', 'about'].forEach(required);
+    ['domain', 'phone', 'whatsapp', 'city', 'district', 'about'].forEach(required);
     if (!c.services.some(s => s.verified)) errors.push('En az bir hizmet doğrulanmalı.');
     if (!c.regions.some(r => r.verified)) errors.push('En az bir gerçek hizmet bölgesi açıklaması eklenmeli.');
-    if (!c.openingHours.length) errors.push('Yapılandırılmış çalışma saatleri eklenmeli.');
   }
+  if (Boolean(c.hoursLabel) !== Boolean(c.openingHours.length)) errors.push('Çalışma saatleri eklenecekse hoursLabel ve openingHours birlikte doldurulmalı.');
   if (c.domain) {
     try {
       const u = new URL(c.domain);

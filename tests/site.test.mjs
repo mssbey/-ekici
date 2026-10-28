@@ -6,6 +6,7 @@ import { JSDOM } from 'jsdom';
 import config from '../src/site.config.mjs';
 import { createSite } from '../src/templates.mjs';
 import { validateConfig } from '../scripts/validate.mjs';
+import { publicationSettings } from '../src/publication.mjs';
 
 const draft = structuredClone(config);
 Object.assign(draft, { published: false, domain: '', phone: '', whatsapp: '', city: '', district: '', address: '', hoursLabel: '', about: '', openingHours: [], regions: [], gallery: [] });
@@ -14,7 +15,7 @@ const preview = createSite(draft);
 const fixture = structuredClone(config);
 // Bunlar yalnızca test verileridir; hiçbir oluşturulmuş siteye yazılmaz.
 Object.assign(fixture, { published: true, domain: 'https://test-isletme.test', phone: '+905550000000', whatsapp: '+905550000000', city: 'Test İl', district: 'Test İlçe', address: 'Test adres', hoursLabel: 'Pazartesi 09.00–18.00', about: 'İşletme tarafından doğrulanmış örnek test metni.', openingHours: [{ days: ['Monday'], opens: '09:00', closes: '18:00' }], regions: [{ name: 'Test Bölge', description: 'Sadece test amacıyla kullanılan özgün bölge açıklaması.', verified: true }] });
-fixture.services[0].verified = true;
+fixture.services.forEach((s, i) => { s.verified = i === 0; });
 const production = createSite(fixture);
 
 test('önizleme: tek H1, benzersiz başlık ve açıklama, noindex', () => {
@@ -41,6 +42,42 @@ test('gerçek bilgi olmadan yayın engellenir', () => {
   assert.ok(errors.some(e => e.startsWith('domain:')));
   assert.ok(errors.some(e => e.includes('hizmet doğrulanmalı')));
   assert.deepEqual(validateConfig(fixture, { production: true }), []);
+});
+
+test('kalıcı yayın adresi indekslenir, Vercel preview adresleri indekslenmez', () => {
+  const domain = 'https://www.mersinuysalotokurtarma.com';
+  assert.deepEqual(publicationSettings({}, domain), { domain, published: true });
+  assert.deepEqual(publicationSettings({ VERCEL_ENV: 'production', VERCEL_URL: 'gecici.vercel.app' }, domain), { domain, published: true });
+  assert.equal(publicationSettings({ VERCEL_ENV: 'preview', SITE_URL: domain }).published, false);
+  assert.equal(publicationSettings({ VERCEL_ENV: 'development' }, domain).published, false);
+  assert.deepEqual(publicationSettings({}), { domain: '', published: false });
+  assert.equal(publicationSettings({ SITE_URL: `${domain}/` }).domain, domain);
+});
+
+test('Mersin yayını: doğru canonical, hizmet sayfaları ve gerçek işletme bilgileri', () => {
+  const live = { ...structuredClone(config), ...publicationSettings({}, 'https://www.mersinuysalotokurtarma.com') };
+  assert.deepEqual(validateConfig(live, { production: true }), []);
+  const site = createSite(live);
+  const home = new JSDOM(site.pages.find(p => p.path === '/').html).window.document;
+  assert.equal(home.querySelector('meta[name="robots"]').content, 'index, follow');
+  assert.equal(home.querySelector('link[rel="canonical"]').href, live.domain + '/');
+  assert.match(home.querySelector('h1').textContent, /Mersin çekici veoto kurtarma/);
+  assert.match(home.querySelector('meta[name="description"]').content, /0534 222 49 83/);
+  const schemas = JSON.parse(home.querySelector('script[type="application/ld+json"]').textContent);
+  assert.equal(schemas[0]['@type'], 'Organization');
+  assert.ok(!schemas[0].address);
+  assert.ok(!schemas[0].openingHoursSpecification);
+  assert.ok(schemas.some(s => s['@type'] === 'WebSite' && s.url === live.domain + '/'));
+  for (const slug of ['oto-kurtarma', 'cekici']) {
+    const page = site.pages.find(p => p.path === `/hizmetler/${slug}/`);
+    assert.ok(page);
+    const doc = new JSDOM(page.html).window.document;
+    const service = JSON.parse(doc.querySelector('script[type="application/ld+json"]').textContent).find(s => s['@type'] === 'Service');
+    assert.equal(service.provider['@id'], live.domain + '/#isletme');
+    assert.match(doc.querySelector('h1').textContent, /Mersin Toroslar/);
+  }
+  const missing = new JSDOM(site.notFound).window.document;
+  assert.equal(missing.querySelector('meta[name="robots"]').content, 'noindex, nofollow');
 });
 
 test('yayında yalnızca doğrulanmış hizmet görünür; bağımsız detay sayfası üretilir', () => {

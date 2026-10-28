@@ -1,9 +1,13 @@
 // TÜM İŞLETME BİLGİLERİNİ BU DOSYADAN DÜZENLEYİN.
 // Boş alanlara tahminî bilgi yazmayın. README.md dosyasındaki yayın adımlarını izleyin.
+import { publicationSettings } from './publication.mjs';
+
 export default {
   name: 'UYSAL OTO KURTARMA',
-  published: false,
-  domain: '', // https://alanadiniz.com — sonunda / olmadan
+  // SITE_URL veya Vercel'in kalıcı production adresi varsa indeksleme açılır.
+  // Vercel Preview ve Development çıktıları noindex kalır.
+  ...publicationSettings(process.env, 'https://www.mersinuysalotokurtarma.com'),
+  googleSiteVerification: process.env.GOOGLE_SITE_VERIFICATION || '',
   phone: '+905342224983', // Uluslararası biçim: +90 ve 10 haneli numara
   phoneDisplay: '0534 222 49 83', // İsteğe bağlı, okunabilir gösterim
   whatsapp: '+905342224983', // Uluslararası biçim: +90 ve 10 haneli numara
@@ -44,14 +48,14 @@ export default {
   about: 'UYSAL OTO KURTARMA olarak Mersin Toroslar başta olmak üzere tüm Mersin’de oto kurtarma ve çekici hizmeti sunuyoruz. Konumunuzu ve aracınızın durumunu dinliyor, taşıma sürecini sizinle birlikte planlıyoruz. Hizmet kapsamını, varış noktasını ve ücreti işlem öncesinde netleştiriyoruz. Bize 0534 222 49 83 numarasından ulaşabilirsiniz.', // İşletmenin geçmişi ve yaklaşımı hakkında doğrulanmış metin
   services: [
     {
-      slug: 'oto-kurtarma', title: 'Oto kurtarma', icon: 'truck', verified: false,
+      slug: 'oto-kurtarma', title: 'Oto kurtarma', icon: 'truck', verified: true,
       short: 'Hareket edemeyen aracınız için konuma ve araç durumuna uygun kurtarma planı.',
       intro: 'Yolda kalan bir araç için ilk adım, bulunduğu konumu ve aracın durumunu netleştirmektir. Oto kurtarma talebinizde aracın marka ve modelini, tekerleklerin durumunu ve ulaşılabilecek güvenli noktayı paylaşın.',
       details: ['Araç bulunduğu yerden hareket edemiyorsa konum ve erişim koşulları birlikte değerlendirilir.', 'Gerekli ekipman ve araç uygunluğu, paylaşılan bilgiler üzerinden görüşülür.', 'Kurtarma yöntemi ve aracın götürüleceği nokta işlem öncesinde netleştirilir.'],
       preparation: 'Konumunuzu, araç modelini ve mümkünse aracın bulunduğu alanın fotoğrafını hazırlayın.'
     },
     {
-      slug: 'cekici', title: 'Çekici hizmeti', icon: 'tow', verified: false,
+      slug: 'cekici', title: 'Çekici hizmeti', icon: 'tow', verified: true,
       short: 'Aracınızın bulunduğu noktadan belirlediğiniz varış noktasına taşınması.',
       intro: 'Çekici ihtiyacında aracın alınacağı ve bırakılacağı noktalar taşımanın planını belirler. Aracınızın çalışır durumda olup olmadığını ve varsa taşıma sırasında dikkat edilmesi gereken özelliklerini iletişim sırasında belirtin.',
       details: ['Alış ve teslim noktaları, mesafe ve yol erişimi açısından değerlendirilir.', 'Aracın ölçüleri, yerden yüksekliği ve hareket durumu taşıma aracının seçimini etkiler.', 'Taşıma kapsamı ve ücret, işlem öncesinde görüşülerek netleştirilir.'],

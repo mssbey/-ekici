@@ -8,7 +8,7 @@ Hizmet alanı: **Toroslar başta olmak üzere tüm Mersin**. Telefon ve WhatsApp
 
 Vercel'de `mssbey/-ekici` deposunu içe aktarın; kök dizin proje kökü, dal `main` olmalı. `vercel.json` dosyası kurulumu `npm ci`, derlemeyi `npm run build`, çıktı klasörünü `dist` olarak ayarlar. Framework seçimi **Other**. Ayarlar ve güvenlik başlıkları [Vercel yapılandırma belgesine](https://vercel.com/docs/project-configuration/vercel-json) göre tanımlıdır.
 
-Mevcut `published: false` ayarıyla Vercel üzerinde site açılır; arama motorları için `noindex` etkin kalır. Alan adı, adres, çalışma saatleri ve hizmet doğrulamaları tamamlanınca aşağıdaki yayın adımlarıyla indekslemeyi açın. Vercel'de ayrıca `build:production` komutunu seçmeyin; mevcut eksik yayın bilgileri nedeniyle bu komut bilerek hata verir.
+Ana yayın adresi **https://www.mersinuysalotokurtarma.com/** olarak tanımlıdır. Normal ve production derlemeleri Google taramasına açık çıktı üretir; Vercel Preview ve Development ortamları `noindex` kalır. Farklı bir ana adres için `SITE_URL` ortam değişkenini kullanabilirsiniz. Search Console doğrulaması, site haritası gönderimi ve Google İşletme Profili adımları [SEO-YAYIN.md](SEO-YAYIN.md) dosyasındadır.
 
 ## Çalıştırma
 
@@ -23,7 +23,7 @@ Yerel adres: **http://localhost:4321**. Port değiştirmek için `npm run dev --
 
 ```bash
 npm test                 # İçerik, yayın kuralları ve etkileşim kontrolleri
-npm run build            # dist/ içine önizleme çıktısı
+npm run build            # dist/ içine ortam ayarlarına göre çıktı
 npm run preview          # Yerel statik sunucu
 npm run build:production # Zorunlu işletme bilgilerini kontrol ederek yayın çıktısı
 ```
@@ -37,7 +37,7 @@ npm run build:production # Zorunlu işletme bilgilerini kontrol ederek yayın ç
 | `phone`, `phoneDisplay`, `whatsapp` | Telefon ve WhatsApp. Bağlantı numaraları boşluksuz `+90…` biçiminde; görünen biçim ayrı tanımlanabilir. |
 | `city`, `district`, `address`, `postalCode` | İl ve ilçe: Mersin / Toroslar. Açık adres ve varsa posta kodu ayrıca eklenir. |
 | `hoursLabel`, `openingHours` | Görünen çalışma saatleri ve aynı saatlerin JSON-LD karşılığı. Günler İngilizce Schema.org adları, saatler `HH:MM`. |
-| `domain`, `mapUrl` | HTTPS alan adı (sonunda `/` olmadan) ve varsa doğrulanmış harita bağlantısı. |
+| `domain`, `mapUrl` | `publicationSettings` ile belirlenen ana HTTPS alan adı ve varsa doğrulanmış harita bağlantısı. `SITE_URL` ana adresi değiştirebilir. |
 | `about`, `logo`, `hero` | İşletme tanıtımı, isteğe bağlı logo, ana görsel ve alt metni. |
 | `services` | Gerçekten sunulan hizmetler. Metinleri kontrol edip yalnızca doğrulananlar için `verified: true` yapın. |
 | `regions` | Gerçek hizmet bölgeleri ve her biri için özgün açıklama. Otomatik mahalle sayfası üretilmez. |
@@ -72,18 +72,18 @@ Mevcut ana görsel **yapay zekâ ile üretilmiş temsili yer tutucudur**; gerçe
 
 ## Yayın öncesi
 
-- Gerçek il/ilçe, telefon, WhatsApp, adres, alan adı, çalışma saatleri ve işletme tanıtımını doldurun.
+- Gerçek il/ilçe, telefon, WhatsApp, alan adı ve işletme tanıtımını doldurun. Açık adres ve çalışma saatleri biliniyorsa ekleyin; bilinmeyen alanlar boş kalabilir.
 - Sunulan hizmetleri onaylayın; sunulmayanları silin veya `verified: false` bırakın. En az bir doğrulanmış hizmet ve bölge gereklidir.
 - Her bölgeye gerçekten o bölgeye ait açıklama yazın. Saat metniyle yapılandırılmış saatlerin aynı olduğunu kontrol edin.
 - Gerçek fotoğrafları ekleyin veya temsili görsel etiketini koruyun. Boş galeri yayın sürümünde sahte operasyon fotoğrafı göstermez.
 - `/gizlilik/` metnini seçilen barındırma sağlayıcısı ve gerçek veri süreçlerine göre tamamlayın.
-- Tüm bilgiler doğrulandığında `published: true` yapın; `npm test` ve `npm run build:production` çalıştırın.
+- Ana adres tanımlandığında indeksleme otomatik açılır; `npm test` ve `npm run build:production` çalıştırın.
 - **`dist/` klasörünü** statik barındırmaya yükleyin. HTTPS ve alan adını bağlayın. Klasör URL’lerini (`/hizmetler/`) destekleyin; bulunmayan sayfalar için `404.html` dosyasını gerçek HTTP 404 koduyla sunun. SPA yönlendirmesi kullanmayın.
 - HTTPS alan adında telefon/WhatsApp bağlantılarını gerçek cihazda, galeri ve menüyü mobil/masaüstünde kontrol edin. Yayın URL’sinde Lighthouse/PageSpeed çalıştırın; Core Web Vitals sonuçları barındırma ve gerçek kullanım verisine bağlıdır.
 
-Eksik bilgilerle varsayılan **önizleme**: tüm sayfalar `noindex, nofollow`, robots kapalı, sitemap boş. Alan adı yokken sahte canonical üretilmez. Eksik numaralar sahte arama başlatmak yerine açıklama açar. `build:production` eksik bilgi varsa hata verir. `published: true` olduğunda normal `build` komutu da aynı doğrulamayı zorunlu tutar.
+**Önizleme ortamında** tüm sayfalar `noindex, nofollow`, robots kapalı, sitemap boştur. Alan adı yokken sahte canonical üretilmez. Eksik numaralar arama başlatmak yerine açıklama açar. Yayın için alan adı, telefon, WhatsApp, il/ilçe, tanıtım, en az bir doğrulanmış hizmet ve bölge gerekir. Açık adres ve saatlerin eksik olması indekslemeyi engellemez; saatler eklenirse metin ve yapılandırılmış veri birlikte doldurulmalıdır.
 
-Yayın çıktısında her sayfada özgün başlık/açıklama, tek H1, mutlak canonical/OG URL, breadcrumb; yalnızca doğrulanmış işletme bilgileriyle AutomotiveBusiness JSON-LD bulunur. Yorum, puan, 7/24 veya varış süresi uydurulmaz. `_headers` dosyası destekleyen sağlayıcılarda güvenlik/cache başlıklarını uygular; diğer sunucularda eşdeğer başlıkları ayarlayın.
+Yayın çıktısında her sayfada özgün başlık/açıklama, tek H1, mutlak canonical/OG URL ve iç sayfalarda breadcrumb bulunur. İşletme verisi açık adres yoksa Organization, adres varsa AutomotiveBusiness olarak üretilir; ana sayfada WebSite, hizmet detaylarında Service JSON-LD eklenir. Yorum, puan, 7/24 veya varış süresi uydurulmaz. `_headers` dosyası destekleyen sağlayıcılarda güvenlik/cache başlıklarını uygular; diğer sunucularda eşdeğer başlıkları ayarlayın.
 
 ## Görsel kaynağı
 
