@@ -5,26 +5,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "trailingSlash": true,
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "uysalotokurtarma.mssbeys.xyz" }],
-      "destination": "https://www.mersinuysalotokurtarma.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "ekici.vercel.app" }],
-      "destination": "https://www.mersinuysalotokurtarma.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "ekici-mss-projects12.vercel.app" }],
-      "destination": "https://www.mersinuysalotokurtarma.com/:path*",
-      "permanent": true
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",

@@ -45,7 +45,7 @@ await Promise.all(urls.map(async url => {
     assert.equal(schemas.find(s => s['@type'] === 'WebSite').name, config.siteName);
   }
 }));
-for (const host of ['uysalotokurtarma.mssbeys.xyz', 'ekici.vercel.app', 'ekici-mss-projects12.vercel.app']) {
+for (const host of ['mersinuysalotokurtarma.com', 'uysalotokurtarma.mssbeys.xyz', 'ekici.vercel.app']) {
   const response = await fetch(`https://${host}/hizmetler/cekici/?kaynak=seo-kontrol`, { redirect: 'manual', signal: AbortSignal.timeout(25000) });
   assert.ok([301, 308].includes(response.status), `${host}: kalıcı yönlendirme yok, HTTP ${response.status}`);
   assert.equal(response.headers.get('location'), `${origin}/hizmetler/cekici/?kaynak=seo-kontrol`, host);

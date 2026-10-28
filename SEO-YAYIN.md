@@ -16,7 +16,7 @@ Hedef marka aramaları: **Mersin Uysal Oto Kurtarma**, **Mersin Uysal Çekici**,
 - Vercel Preview ve development çıktıları `noindex` kalır.
 - Ana sayfa başlığı: **Mersin Uysal Oto Kurtarma | Uysal Çekici**. Görünen başlık, telefon, metin ve WebSite/Organization verileri aynı işletmeyi tanımlar.
 - Çekici detay sayfasında Mersin Uysal Çekici adı, araç erişimi, kayar kasaya yükleme ve fiyatlandırma için gereken bilgiler bulunur.
-- Eski `uysalotokurtarma.mssbeys.xyz`, `ekici.vercel.app` ve `ekici-mss-projects12.vercel.app` adresleri aynı sayfanın ana alan adına kalıcı olarak yönlenir. Yol ve sorgu parametreleri korunur; geçici preview adresleri bu kurala dahil değildir.
+- Eski `uysalotokurtarma.mssbeys.xyz` ve `ekici.vercel.app` adresleri Vercel proje alan adı ayarlarıyla aynı sayfanın ana alan adına 308 koduyla yönlenir. Yol ve sorgu parametreleri korunur. `ekici-mss-projects12.vercel.app` adresi Vercel oturum korumasındadır; bu koruma korunur. Bu alan adı ayarları `vercel.json` içinde tutulmaz.
 
 ## Yayına alma
 
