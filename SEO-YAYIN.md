@@ -2,6 +2,8 @@
 
 Ana adres: **https://www.mersinuysalotokurtarma.com/**
 
+Hedef marka aramaları: **Mersin Uysal Oto Kurtarma**, **Mersin Uysal Çekici**, **Uysal Çekici**.
+
 ## Hazırlanan site düzenlemeleri
 
 - Yayın adresi için `index, follow`; `robots.txt` taramaya açık.
@@ -12,6 +14,9 @@ Ana adres: **https://www.mersinuysalotokurtarma.com/**
 - `Organization`, `WebSite`, `Service` ve içerik yolu yapılandırılmış verileri.
 - Açık adres ve saat bilgisi bilinmediği için eklenmedi. Adres doğrulandığında işletme şeması otomatik `AutomotiveBusiness` olur.
 - Vercel Preview ve development çıktıları `noindex` kalır.
+- Ana sayfa başlığı: **Mersin Uysal Oto Kurtarma | Uysal Çekici**. Görünen başlık, telefon, metin ve WebSite/Organization verileri aynı işletmeyi tanımlar.
+- Çekici detay sayfasında Mersin Uysal Çekici adı, araç erişimi, kayar kasaya yükleme ve fiyatlandırma için gereken bilgiler bulunur.
+- Eski `uysalotokurtarma.mssbeys.xyz`, `ekici.vercel.app` ve `ekici-mss-projects12.vercel.app` adresleri aynı sayfanın ana alan adına kalıcı olarak yönlenir. Yol ve sorgu parametreleri korunur; geçici preview adresleri bu kurala dahil değildir.
 
 ## Yayına alma
 
@@ -20,6 +25,8 @@ Ana adres: **https://www.mersinuysalotokurtarma.com/**
 3. Ana sayfanın HTML kaynağında `<meta name="robots" content="index, follow">` bulunduğunu kontrol edin.
 4. `/robots.txt` içinde `Allow: /` ve doğru sitemap adresini kontrol edin.
 5. `/sitemap.xml` dosyasında ana adresi ve iki hizmet sayfasını kontrol edin.
+
+`npm run check:seo` komutu yayındaki sitemap adreslerini Googlebot kullanıcı aracısıyla ister; HTTP durumunu, indeksleme iznini, canonical adreslerini, işletme telefonunu, marka adını, benzersiz başlık/açıklamaları ve eski adreslerin yönlendirmelerini denetler. Bu kontrol Google'ın siteyi gerçekten taradığını veya dizine eklediğini göstermez. Dizin durumu Search Console'dan görülür.
 
 Vercel'de ana alan adı `www.mersinuysalotokurtarma.com` olmalı; www olmadan gelen trafik bu adrese yönlendirilmeli. Bu yönlendirme inceleme sırasında çalışıyordu.
 
@@ -32,6 +39,8 @@ Vercel'de ana alan adı `www.mersinuysalotokurtarma.com` olmalı; www olmadan ge
 5. **URL Denetimi** ile ana sayfayı, `/hizmetler/oto-kurtarma/` ve `/hizmetler/cekici/` sayfalarını kontrol edip dizine eklenmesini isteyin.
 
 Tarama ve arama sonucuna eklenme Google'ın kararına bağlıdır; anında görünme veya belirli bir sıra garantisi yoktur. [Google'ın tarama isteği açıklaması](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl?hl=tr).
+
+28 Ekim 2026 incelemesinde Vercel'de `GOOGLE_SITE_VERIFICATION` ortam değişkeni bulunmuyordu; Search Console sahipliği veya sitemap gönderimi doğrulanmış değildir. Kullanıcının Google oturumu ya da Google'ın verdiği doğrulama kaydı gerektiği için bu adımlar tamamlanmış olarak değerlendirilmemelidir. Doğrulama kaydı alındığında DNS veya HTML etiketi yöntemiyle tamamlanabilir. Sıradan işletme sayfaları için özel Google Indexing API yerine yukarıdaki Search Console yöntemleri kullanılmalıdır.
 
 ## Mersin ve Google Haritalar
 

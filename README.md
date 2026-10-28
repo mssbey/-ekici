@@ -26,6 +26,7 @@ npm test                 # İçerik, yayın kuralları ve etkileşim kontrolleri
 npm run build            # dist/ içine ortam ayarlarına göre çıktı
 npm run preview          # Yerel statik sunucu
 npm run build:production # Zorunlu işletme bilgilerini kontrol ederek yayın çıktısı
+npm run check:seo        # Yayındaki sayfaların ve eski alan adı yönlendirmelerinin kontrolü
 ```
 
 ## Bilgileri nereden değiştireceğim?
@@ -34,6 +35,7 @@ npm run build:production # Zorunlu işletme bilgilerini kontrol ederek yayın ç
 
 | Alan | İçerik |
 | --- | --- |
+| `siteName`, `alternateNames` | Sitenin görünen adı ve gerçek marka varyantları. Ana sayfa, Open Graph ve WebSite verileri aynı site adını kullanır. |
 | `phone`, `phoneDisplay`, `whatsapp` | Telefon ve WhatsApp. Bağlantı numaraları boşluksuz `+90…` biçiminde; görünen biçim ayrı tanımlanabilir. |
 | `city`, `district`, `address`, `postalCode` | İl ve ilçe: Mersin / Toroslar. Açık adres ve varsa posta kodu ayrıca eklenir. |
 | `hoursLabel`, `openingHours` | Görünen çalışma saatleri ve aynı saatlerin JSON-LD karşılığı. Günler İngilizce Schema.org adları, saatler `HH:MM`. |

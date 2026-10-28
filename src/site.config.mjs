@@ -4,6 +4,8 @@ import { publicationSettings } from './publication.mjs';
 
 export default {
   name: 'UYSAL OTO KURTARMA',
+  siteName: 'Mersin Uysal Oto Kurtarma',
+  alternateNames: ['Uysal Oto Kurtarma', 'Mersin Uysal Çekici', 'Uysal Çekici'],
   // SITE_URL veya Vercel'in kalıcı production adresi varsa indeksleme açılır.
   // Vercel Preview ve Development çıktıları noindex kalır.
   ...publicationSettings(process.env, 'https://www.mersinuysalotokurtarma.com'),
@@ -45,21 +47,25 @@ export default {
     width: 1680,
     height: 756,
   },
-  about: 'UYSAL OTO KURTARMA olarak Mersin Toroslar başta olmak üzere tüm Mersin’de oto kurtarma ve çekici hizmeti sunuyoruz. Konumunuzu ve aracınızın durumunu dinliyor, taşıma sürecini sizinle birlikte planlıyoruz. Hizmet kapsamını, varış noktasını ve ücreti işlem öncesinde netleştiriyoruz. Bize 0534 222 49 83 numarasından ulaşabilirsiniz.', // İşletmenin geçmişi ve yaklaşımı hakkında doğrulanmış metin
+  about: 'Mersin Uysal Oto Kurtarma olarak Toroslar başta olmak üzere tüm Mersin’de oto kurtarma ve çekici hizmeti sunuyoruz. Uysal Çekici ile aracınızın bulunduğu noktadan istediğiniz servis, otopark veya teslim adresine taşıma planını birlikte oluşturabilirsiniz. Konumunuzu ve aracınızın durumunu dinliyor; hizmet kapsamını, varış noktasını ve ücreti işlem öncesinde netleştiriyoruz. Telefon ve WhatsApp üzerinden 0534 222 49 83 numarasından bize ulaşabilirsiniz.', // İşletmenin geçmişi ve yaklaşımı hakkında doğrulanmış metin
   services: [
     {
       slug: 'oto-kurtarma', title: 'Oto kurtarma', icon: 'truck', verified: true,
+      localName: 'Mersin Uysal Oto Kurtarma',
+      pageTitle: 'Mersin Uysal Oto Kurtarma | Toroslar Araç Kurtarma',
       short: 'Hareket edemeyen aracınız için konuma ve araç durumuna uygun kurtarma planı.',
-      intro: 'Yolda kalan bir araç için ilk adım, bulunduğu konumu ve aracın durumunu netleştirmektir. Oto kurtarma talebinizde aracın marka ve modelini, tekerleklerin durumunu ve ulaşılabilecek güvenli noktayı paylaşın.',
+      intro: 'Mersin Uysal Oto Kurtarma ile Toroslar başta olmak üzere Mersin genelinde, hareket edemeyen aracınız için kurtarma ve taşıma planı oluşturabilirsiniz. Yolda kalan araç için önce bulunduğunuz konumu, aracın marka ve modelini, tekerleklerin durumunu ve güvenli erişim noktasını değerlendiriyoruz. Aracınızın kaza veya arıza nedeniyle hareket edemediğini, direksiyonun kilitli olup olmadığını ve tekerleklerin dönüp dönmediğini görüşme sırasında belirtin.',
       details: ['Araç bulunduğu yerden hareket edemiyorsa konum ve erişim koşulları birlikte değerlendirilir.', 'Gerekli ekipman ve araç uygunluğu, paylaşılan bilgiler üzerinden görüşülür.', 'Kurtarma yöntemi ve aracın götürüleceği nokta işlem öncesinde netleştirilir.'],
-      preparation: 'Konumunuzu, araç modelini ve mümkünse aracın bulunduğu alanın fotoğrafını hazırlayın.'
+      preparation: 'Konumunuzu, araç modelini ve mümkünse aracın bulunduğu alanın fotoğrafını hazırlayın. Telefonla ya da WhatsApp’tan bize ulaşın; kurtarma koşullarını ve teslim adresini işlem öncesinde birlikte netleştirelim. Yaralanma veya acil tehlike varsa önce 112’yi arayın.'
     },
     {
       slug: 'cekici', title: 'Çekici hizmeti', icon: 'tow', verified: true,
+      localName: 'Mersin Uysal Çekici',
+      pageTitle: 'Mersin Uysal Çekici | Toroslar Çekici Hizmeti',
       short: 'Aracınızın bulunduğu noktadan belirlediğiniz varış noktasına taşınması.',
-      intro: 'Çekici ihtiyacında aracın alınacağı ve bırakılacağı noktalar taşımanın planını belirler. Aracınızın çalışır durumda olup olmadığını ve varsa taşıma sırasında dikkat edilmesi gereken özelliklerini iletişim sırasında belirtin.',
+      intro: 'Mersin Uysal Çekici hizmetimizle aracınızı bulunduğu noktadan belirlediğiniz servis, otopark veya teslim adresine taşıyoruz. Toroslar ve tüm Mersin için alış ve teslim noktalarını paylaşarak taşıma uygunluğunu öğrenebilirsiniz. Aracınızın çalışır durumda olup olmadığını, otomatik vites veya kilitli tekerlek gibi taşıma sırasında dikkat edilmesi gereken özelliklerini bize bildirin. Kayar kasaya yükleme, sabitleme ve teslim süreci aracın durumuna göre planlanır.',
       details: ['Alış ve teslim noktaları, mesafe ve yol erişimi açısından değerlendirilir.', 'Aracın ölçüleri, yerden yüksekliği ve hareket durumu taşıma aracının seçimini etkiler.', 'Taşıma kapsamı ve ücret, işlem öncesinde görüşülerek netleştirilir.'],
-      preparation: 'Alış ve varış adreslerini, araç türünü ve aracın yürür durumda olup olmadığını paylaşın.'
+      preparation: 'Alış ve varış adreslerini, araç türünü ve aracın yürür durumda olup olmadığını paylaşın. Araç kapalı otoparkta veya dar bir sokaktaysa giriş yüksekliğini ve erişim koşullarını belirtin. Mesafe, yükleme koşulları ve araç durumuna göre kapsam ve fiyatı taşıma başlamadan önce netleştirin.'
     },
     {
       slug: 'yol-yardim', title: 'Yol yardım', icon: 'tool', verified: false,

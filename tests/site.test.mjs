@@ -61,20 +61,27 @@ test('Mersin yayını: doğru canonical, hizmet sayfaları ve gerçek işletme b
   const home = new JSDOM(site.pages.find(p => p.path === '/').html).window.document;
   assert.equal(home.querySelector('meta[name="robots"]').content, 'index, follow');
   assert.equal(home.querySelector('link[rel="canonical"]').href, live.domain + '/');
-  assert.match(home.querySelector('h1').textContent, /Mersin çekici veoto kurtarma/);
+  assert.equal(home.title, 'Mersin Uysal Oto Kurtarma | Uysal Çekici');
+  assert.match(home.querySelector('h1').textContent, /Mersin Uysal Oto Kurtarma/);
+  assert.ok(home.body.textContent.includes('Mersin Uysal Çekici'));
   assert.match(home.querySelector('meta[name="description"]').content, /0534 222 49 83/);
   const schemas = JSON.parse(home.querySelector('script[type="application/ld+json"]').textContent);
   assert.equal(schemas[0]['@type'], 'Organization');
   assert.ok(!schemas[0].address);
   assert.ok(!schemas[0].openingHoursSpecification);
-  assert.ok(schemas.some(s => s['@type'] === 'WebSite' && s.url === live.domain + '/'));
+  const website = schemas.find(s => s['@type'] === 'WebSite');
+  assert.equal(website.url, live.domain + '/');
+  assert.equal(website.name, home.querySelector('meta[property="og:site_name"]').content);
+  assert.ok(website.alternateName.includes('Mersin Uysal Çekici'));
   for (const slug of ['oto-kurtarma', 'cekici']) {
     const page = site.pages.find(p => p.path === `/hizmetler/${slug}/`);
     assert.ok(page);
     const doc = new JSDOM(page.html).window.document;
     const service = JSON.parse(doc.querySelector('script[type="application/ld+json"]').textContent).find(s => s['@type'] === 'Service');
     assert.equal(service.provider['@id'], live.domain + '/#isletme');
-    assert.match(doc.querySelector('h1').textContent, /Mersin Toroslar/);
+    assert.match(doc.querySelector('h1').textContent, /Mersin Uysal/);
+    assert.equal(service.name, doc.querySelector('h1').textContent);
+    assert.ok(doc.body.textContent.includes('Toroslar'));
   }
   const missing = new JSDOM(site.notFound).window.document;
   assert.equal(missing.querySelector('meta[name="robots"]').content, 'noindex, nofollow');

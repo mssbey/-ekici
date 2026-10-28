@@ -12,7 +12,8 @@
     "build:production": "node scripts/build.mjs --production",
     "preview": "node scripts/server.mjs",
     "images": "node scripts/images.mjs",
-    "test": "node --test tests/site.test.mjs"
+    "test": "node --test tests/site.test.mjs",
+    "check:seo": "node scripts/audit-seo.mjs"
   },
   "devDependencies": {
     "jsdom": "^29.1.1",
